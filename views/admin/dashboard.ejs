@@ -1,0 +1,88 @@
+<% include  ../partials/app_header %>
+<% include  ../partials/app_nav %>
+
+<div class="main-content">
+	<% include  ../partials/sidebar %>
+
+	<div id="page-content-wrapper">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-9">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<span>Area of Response</span>
+						</div>
+						<div class="panel-body" id="dash-map-container">
+							<div id="map"></div>
+						</div>
+					</div>
+
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<span>Emergency Stats</span>
+						</div>
+						<div class="panel-body" id="dash-emergency-container">
+							<div id="emergencyStats"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<h3>Monitoring Security Team</h3>
+					<div class="list-group">
+					  <div class="list-group-item">
+					    <div class="row-picture">
+					      <img class="circle" src="http://lorempixel.com/56/56/people/9" alt="icon">
+					    </div>
+					    <div class="row-content">
+					      <h4 class="list-group-item-heading">Juan Dela Cruz</h4>
+
+					      <p class="list-group-item-text">Area 4</p>
+					    </div>
+					  </div>
+					  <div class="list-group-separator"></div>
+
+					  <div class="list-group-item">
+					    <div class="row-picture">
+					      <img class="circle" src="http://lorempixel.com/56/56/people/7" alt="icon">
+					    </div>
+					    <div class="row-content">
+					      <h4 class="list-group-item-heading">Juan Dela Cruz</h4>
+
+					      <p class="list-group-item-text">Area 4</p>
+					    </div>
+					  </div>
+					  <div class="list-group-separator"></div>
+
+					  <div class="list-group-item">
+					    <div class="row-picture">
+					      <img class="circle" src="http://lorempixel.com/56/56/people/3" alt="icon">
+					    </div>
+					    <div class="row-content">
+					      <h4 class="list-group-item-heading">Juan Dela Cruz</h4>
+
+					      <p class="list-group-item-text">Area 4</p>
+					    </div>
+					  </div>
+					  <div class="list-group-separator"></div>
+
+					  <div class="list-group-item">
+					    <div class="row-picture">
+					      <img class="circle" src="http://lorempixel.com/56/56/people/4" alt="icon">
+					    </div>
+					    <div class="row-content">
+					      <h4 class="list-group-item-heading">Juan Dela Cruz</h4>
+
+					      <p class="list-group-item-text">Area 4</p>
+					    </div>
+					  </div>
+					  <div class="list-group-separator"></div>
+					 </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<% include ../partials/vendors %>
+<script type="text/javascript" src="/js/dashboard.js"></script>
+<% include ../partials/footer %>
+

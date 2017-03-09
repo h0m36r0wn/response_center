@@ -1,0 +1,76 @@
+<% include  ../partials/app_header %>
+<% include  ../partials/app_nav %>
+
+<div class="main-content">
+	<% include  ../partials/sidebar %>
+
+	<div id="page-content-wrapper">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="row">
+					 <div class="col-sm-12" >
+					 	<div class="panel panel-default">
+					 		<div class="panel-heading">
+					 			Sort data
+					 		</div>
+					 		<div class="panel-body">
+					 			<select id="sorter" class="form-control">
+					 				<option disabled selected>Sort data within</option>
+					 				<option value="last_month" >Last Month</option>
+					 				<option value="this_month" >This month</option>
+					 				<option value="last_seven_days">Last 7 days</option>
+					 			</select>
+					 		</div>
+					 	</div>
+					 </div>
+				</div>
+				<div class="row">
+					<div class="col-sm-7 chartsContainer">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<div id="emergencyPerDay"></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-5">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<div id="reportTblContainer">
+									<table class="table" id="dateAndTypesTbl">
+										<thead>
+											<th>Name</th>
+											<th>Report Type</th>
+											<th>Date Reported</th>
+										</thead>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-7 chartsContainer">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<div id="emergencyTypes"></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-5">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<div id="emergencyBar"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	
+</div>
+<% include ../partials/vendors %>
+<script type="text/javascript" src="/js/stats.js"></script>
+<% include ../partials/footer %>
+

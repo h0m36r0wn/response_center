@@ -1,0 +1,34 @@
+<% include  ../partials/app_header %>
+<% include  ../partials/app_nav %>
+
+<div class="main-content">
+	<% include  ../partials/sidebar %>
+
+	<div id="page-content-wrapper">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-10 col-sm-offset-1">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<table class="table" id="securityTbl">
+								<thead>
+									<th>Name</th>
+									<th>Area</th>
+									<th>Status</th>
+								</thead>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="action-footer">
+		<a  href="/admin/add_team" class="btn btn-default btn-fab" data-toggle="tooltip" data-placement="top" title="" data-original-title="Create new annoucement"><i class="material-icons">&#xE89C;</i></a>
+	</div>
+</div>
+<% include ../partials/vendors %>
+<script type="text/javascript" src="/js/security_team.js"></script>
+<% include ../partials/footer %>
+

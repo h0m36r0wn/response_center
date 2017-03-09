@@ -1,0 +1,43 @@
+.navbar-default{
+	background: $black !important;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	#logo-container{
+		display: inline-block;
+		padding:15px 0px;
+		text-decoration: none;
+		margin-right: 50px;
+		span{
+			font-weight: bold;
+			color:$yellow-dark;
+			font-size: 1.8rem;
+		}
+		img{
+			margin-right: 15px;
+			width: 40px;
+		}
+	}
+	.nav{
+		li{
+			a{
+				font-size: 1.8rem;
+				line-height: 28px;
+			}
+		}
+	}
+	#page-nav{
+		text-transform: capitalize;
+	}
+	#navNotif{
+	    .badge-notif{
+	        background: $red-accent;
+	        position: relative;
+	        padding: 2px;
+	        width: 18px !important;
+	        height: 18px !important;
+	        border-radius: 15px;
+	        top:-13px;
+	        left:-13px;
+	    }
+	}
+
+}

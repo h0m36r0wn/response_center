@@ -1,0 +1,65 @@
+<% include  ../partials/app_header %>
+<% include  ../partials/app_nav %>
+
+<div class="main-content">
+	<% include  ../partials/sidebar %>
+
+	<div id="page-content-wrapper">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-8 col-sm-offset-2">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							Security Team Information
+						</div>
+						<div class="panel-body">
+							<form id="securityForm" method="POST">
+								<div class="form-group">
+									<label>Email</label>
+									<input type="text" name="email" class="form-control input-lg">
+								</div>
+								<div class="form-group">
+									<label>Password</label>
+									<input type="password" name="password" class="form-control
+									input-lg" id="password">
+								</div>
+								<div class="form-group">
+									<label>Confirm Password</label>
+									<input type="password" name="confirm_password" class="form-control
+									input-lg" id="confirm_password">
+								</div>
+								<div class="form-group">
+									<label>First Name</label>
+									<input type="text" name="first_name" class="form-control input-lg">
+								</div>
+								<div class="form-group">
+									<label>Last Name</label>
+									<input type="text" name="last_name" class="form-control input-lg">
+								</div>
+								<div class="form-group">
+									<label>Area</label>
+									<select class="form-control input-lg" name="area" id="area">
+										<option value="1" selected disabled>Select assigment area</option>
+										<option value="1">Area 1</option>
+										<option value="2">Area 2</option>
+										<option value="3">Area 3</option>
+										<option value="4">Area 4</option>
+									</select>
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="action-footer">
+		<button type="submit" class="btn btn-default btn-fab"
+		data-toggle="tooltip" data-placement="top" data-original-title="Save"
+		id="saveBtn"><i class="material-icons">&#xE161;</i></button>
+	</div>
+	</form>
+</div>
+<% include ../partials/vendors %>
+<script type="text/javascript" src="/js/add_team.js"></script>
+<% include ../partials/footer %>
+

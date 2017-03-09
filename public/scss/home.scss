@@ -1,0 +1,100 @@
+#hero{
+	min-height: 450px;
+	background: url(/img/banner.png);
+	background-repeat: none;
+	background-size: cover;
+	background-position: center center;
+	background-attachment: fixed;
+
+	.container{
+		padding:100px 0px;
+
+		h1{
+			font-size: 4.8rem;
+			color:$white;
+			font-weight: 400;
+		}
+		h2{
+			color:$white;
+			font-weight: 200;
+		}
+		#hero-text-container{
+			padding:0;
+			#hero-text{
+				color:$white;
+				font-size: 1.8rem;
+			}
+		}
+		
+	}
+}
+
+#shake-it{
+	background: $yellow;
+	padding:20px 0px 25px 0px;
+	h2{
+		font-size: 3.4rem;
+	}
+}
+
+#about{
+	background:$black;
+	color:$white;
+	#about-container{
+		padding-top:80px;
+		h2{
+			font-weight: bold;
+		}
+		p{
+			font-size: 1.6rem;
+		}
+	}
+	#phone-container{
+		#help{
+			position: relative;
+			display: block;
+			font-size: 5.0rem;
+		}
+		padding-top: 80px;
+		position: relative;
+		overflow: hidden;
+		img{
+			position: relative;
+			margin-bottom:-150px;
+		}
+	}
+}
+
+
+#get{
+	padding:20px 0px;
+	h2{
+		display: inline-block;
+		font-style: 3.4rem;
+	}
+	background: $yellow;
+	.btn{
+		background-attachment: $yellow-dark;
+		border: 1px solid $black;
+		font-weight: bold;
+		border-radius: 10px;
+	}
+}
+
+#follow{
+	padding:80px 0px;
+	background: url(/img/people.png);
+	background-size: cover;
+	background-position: center 50%;
+	background-repeat: no-repeat;
+	h2{
+		color:$black;
+	}
+	#social-media{
+		margin-top: 20px;
+		li{
+			display: inline-block;
+			margin-left: 20px;
+		}
+	}
+}

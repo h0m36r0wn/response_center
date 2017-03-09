@@ -1,0 +1,88 @@
+<% include  ../partials/app_header %>
+<% include  ../partials/app_nav %>
+
+<div class="main-content">
+	<% include  ../partials/sidebar %>
+	<div id="page-content-wrapper">
+		<div class="container-fluid">
+			<div class="row">
+			<form id="postForm" method="POST">
+				<div class="col-sm-9">
+					<div class="panel panel-default">
+						<div class="panel-body">
+								<div class="form-group">
+									<label>Title</label>
+									<input type="text" class="form-control input-lg" name="post_title"
+									value="<%= typeof info !== 'undefined' ?
+									info.annoucementDetails.post_title : '' %>">
+								</div>
+								<div  class="form-group">
+									<label>Content</label>
+									<textarea  name="content" class="form-control input-lg" rows="10"><%= typeof info !== 'undefined' ?
+									info.annoucementDetails.content : '' %></textarea>
+								</div>
+								<div class="form-group">
+									<input type="text" name="post_status" id="postStatus"
+									style="display:none;">
+								</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="panel panel-default">
+							<div class="panel-body">
+								<div class="form-group">
+									<label>Category</label>
+									<select class="form-control" name="post_category" id="post_category">
+										<option value="" disabled selected>Select post category</option>
+										<option value="news" <%= typeof info !== 'undefined'
+										&& info.annoucementDetails.post_category  == "news" ? "selected" : ''
+										%>>News</option>
+										<option value="tips" <%= typeof info !== 'undefined'
+										&& info.annoucementDetails.post_category  == "tips" ? "selected" : ''
+										%>>Tips</option>
+										<option value="uncategorized" <%= typeof info !== 'undefined'
+										&& info.annoucementDetails.post_category  == "uncategorized" ? "selected" : ''
+										%>>Uncategorized</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					<div class="panel">
+						<div class="panel-body">
+							<div class="form-group">
+							  <input type="file" name="cover_file" multiple="" id="cover_file" accept="image/*">
+							  <div class="input-group">
+							    <input type="text" readonly="" class="form-control" placeholder="Choose cover photo">
+							      <span class="input-group-btn input-group-sm">
+							        <button type="button" class="btn btn-fab btn-fab-mini">
+							          <i class="material-icons">attach_file</i>
+							        </button>
+							      </span>
+							  </div>
+							  <input type="text" name="cover_photo" id="cover_photo"
+							  style="visibility: hidden;" value="<%= typeof info !== 'undefined' ?
+									info.annoucementCover : '' %>">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="action-footer" >
+		<button type="button" class="btn btn-default btn-fab" data-toggle="tooltip"
+		data-placement="top" data-original-title="Preview post in application view" id="previewApp"><i class="material-icons">&#xE324;</i></button>
+		<button  type="submit" class="btn btn-default btn-fab"  data-toggle="tooltip"
+		data-placement="top" data-original-title="Publish post" id="publishPost"><i class="material-icons">&#xE161;</i></button>
+		<button type="submit" class="btn btn-default btn-fab" data-toggle="tooltip"
+		data-placement="top" data-original-title="Save post as draft" id="saveDraft" ><i class="material-icons">&#xE151;</i></button>
+
+	</div>
+	</form>
+</div>
+
+<% include ../partials/vendors %>
+<script type="text/javascript" src="/js/post.js"></script>
+<% include ../partials/footer %>
+

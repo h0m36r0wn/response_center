@@ -1,0 +1,30 @@
+.navbar{
+	background: $black !important;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	#logo{
+		text-decoration: none;
+		font-size: 2.5rem;
+		text-transform: uppercase;
+		color:$yellow;
+		img{
+				margin: 10px 0px;
+		}
+	}
+	#navbar{
+		li{
+			&.active{
+				a{
+					background: transparentize($yellow-dark,0.8);
+				}
+				border-bottom: 5px solid $yellow-dark;
+			}
+			a{
+				line-height: 40px;
+				font-weight: bold;
+				color:$yellow;
+				font-size: 1.8rem;
+				text-transform: uppercase;
+			}
+		}
+	}
+}

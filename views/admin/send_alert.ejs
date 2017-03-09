@@ -1,0 +1,46 @@
+<% include  ../partials/app_header %>
+<section id="app-preview">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-10 col-sm-offset-1">
+				<button class="btn btn-lg btn-warning" id="sosBtn">Send SOS</button>
+			</div>
+		</div>
+	</div>
+</section>
+
+<% include ../partials/vendors %>
+<script type="text/javascript">
+	$(document).ready(function(){
+		residentApp.init();
+	})
+
+	var residentApp = (function(){
+		var locations = [
+			{ lat:14.528478, lng:121.068967, 	type:'Burglary' },
+			{ lat:14.530753, lng:121.070887, 	type:'Intimidation'},
+			{ lat:14.530420, lng:121.069267,	type:'Heinous Crime'}, 
+			{ lat:14.531656, lng:121.074138,	type:'Accident'}, 
+			{ lat:14.534149 , lng:121.073891, 	type:'Other'},
+		];
+		var $sosBtn = $('#sosBtn');
+		var socket = io('http://localhost:3000');
+
+		var init = function(){
+			sendSos();
+		}
+
+		var sendSos = function(){
+			$sosBtn.unbind().click(function(){
+				if(locations.length > 0 ){
+					var ind = Math.floor(Math.random()*locations.length);
+					var location = locations[ind];
+					socket.emit('sos',location)
+					locations.splice(ind,1);
+				}
+			})
+		}
+		return {init:init}
+	}())
+</script>
+<% include ../partials/footer %>

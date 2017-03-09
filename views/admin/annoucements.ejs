@@ -1,0 +1,50 @@
+<% include  ../partials/app_header %>
+<% include  ../partials/app_nav %>
+
+<div class="main-content" id="annoucements">
+	<% include  ../partials/sidebar %>
+
+	<div id="page-content-wrapper">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-10 col-sm-offset-1">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3>Annoucement List</h3>
+						</div>
+						<div class="panel-body" id="tblContainer">
+							<table class="table" id="annoucementsTbl">
+								<thead>
+									<th>Title</th>
+									<th>Status</th>
+									<th>Data Created</th>
+								</thead>
+								<tbody></tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="action-footer">
+		<a  href="/admin/post" class="btn btn-default btn-fab" data-toggle="tooltip" data-placement="top" title="" data-original-title="Create new annoucement"><i class="material-icons">&#xE89C;</i></a>
+		<button  class="btn btn-default btn-fab"
+		data-toggle="tooltip" data-placement="top" title=""
+		data-original-title="Edit Annoucement" id="editAnn"><i class="material-icons">&#xE3C9;</i></button>
+		<button  class="btn btn-default btn-fab"
+		data-toggle="tooltip" data-placement="top" title=""
+		data-original-title="Delete Annoucement"  id="deleteAnn"><i class="material-icons">&#xE16C;</i></button>
+		<button  class="btn btn-default btn-fab"
+		data-toggle="tooltip" data-placement="top" title=""
+		data-original-title="Preview Annoucement in app" id="previewAnn"><i class="material-icons">&#xE324;</i></button>
+
+	</div>
+</div>
+<% include ../partials/vendors %>
+<script type="text/javascript">
+	var toastMsg = '<%= postMessage %>';		
+</script>
+<script type="text/javascript" src="/js/annoucement.js"></script>
+<% include ../partials/footer %>
+

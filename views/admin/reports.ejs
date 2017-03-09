@@ -1,0 +1,36 @@
+<% include  ../partials/app_header %>
+<% include  ../partials/app_nav %>
+
+<div class="main-content">
+	<% include  ../partials/sidebar %>
+
+	<div id="page-content-wrapper">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-10 col-sm-offset-1">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3>Incident Reports</h3>
+						</div>
+						<div class="panel-body">
+							<table class="table" id="incidentTbl">
+								<thead>
+									<th>Name</th>
+									<th>Mobile Number</th>
+									<th>Incident type</th>
+									<th>Date</th>
+									<th>Action</th>
+								</thead>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>
+<% include ../partials/vendors %>
+<script type="text/javascript" src="/js/reports.js"></script>
+<% include ../partials/footer %>
+

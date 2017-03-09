@@ -1,0 +1,15 @@
+#annoucements{
+    #tblContainer{
+        padding: 20px 40px;
+        #annoucementsTbl{
+            tr{
+                transition: all .5s;
+                &.selected{
+                    background: $grey;
+                    color:$white;
+                }
+            }
+               
+        }
+    }
+}

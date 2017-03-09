@@ -1,0 +1,41 @@
+<!-- Fixed navbar -->
+   <nav class="navbar navbar-default navbar-fixed-top">
+     <div class="container-fluid">
+       <div class="navbar-header">
+         <button type="button" class="navbar-toggle collapsed"  aria-expanded="false" aria-controls="navbar">
+           <span class="sr-only">Toggle navigation</span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+         </button>
+         <a  href="#" id="logo-container">
+           <img src="/img/bolt.png">
+           <span>Response Center</span>
+         </a>
+       </div>
+       <div id="navbar" class="navbar-collapse ">
+          <ul class="nav navbar-nav hidden-xs">
+            <li>
+              <a><% if(typeof page !='undefined') { %>
+                  <span id="page-nav"> <%= page %></span>
+                <% } %>
+                </a>
+            </li>
+         </ul>
+         <ul class="nav navbar-nav navbar-right hidden-xs" id="navNotif">
+          <li><a href="#"><i class="material-icons">&#xE003;</i></a></li>
+          <li><a href="#"><i class="material-icons">&#xE80E; <span class="badge
+           badge-notif">!</span></i></a></li>
+           <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="material-icons">&#xE5D4;</i> </a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Hello, Admin</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Actions</li>
+                <li><a href="/response/signout"><i class="material-icons">&#xE879;</i>&nbsp; Sign out</a></li>
+              </ul>
+            </li>
+         </ul>
+       </div><!--/.nav-collapse -->
+     </div>
+   </nav>

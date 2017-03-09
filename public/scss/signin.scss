@@ -1,0 +1,70 @@
+#signin-nav{
+	padding:5px 0px;
+	background: $white;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	img{
+		width: 50px;
+	}
+}
+#login-section{
+	#login-container{
+		padding:50px 30px;
+	}
+	#marketing{
+		color:$grey;
+		font-weight: bold;
+		font-size: 1.8rem;
+	}
+	ul{
+		padding-top: 20px;
+		li{
+			margin-bottom: 15px;
+			a{
+				color:$yellow-dark;
+				font-weight: bold;
+				font-size: 1.8rem;
+			}
+		}
+	}
+	#login-panel{
+		.panel-heading{
+			background: #fff !important;
+			span{
+				font-size: 2.4rem;
+			}
+			border-bottom: 1px solid $white;
+		}
+		.panel-body{
+			label{
+				font-weight: bold;
+				&.error{
+					color:$red-accent;
+				}
+			}
+			padding:20px 20px;
+			#signin-btn{
+				background: $green;
+				color:$white;
+			}
+		}
+	}
+}
+
+#login-footer{
+	border-top: 1px solid #e1e1e1;
+	position: absolute;
+	right: 0;
+	left: 0;
+	bottom:0;
+	padding:10px 0px ;
+	ul{
+		margin: 0;
+		li{
+			display: inline-block;
+			margin-right: 20px;
+			a{
+				color:$grey;
+			}
+		}
+	}
+}

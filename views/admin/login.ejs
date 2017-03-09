@@ -1,0 +1,59 @@
+<% include ../partials/app_header %>
+<section id="signin-nav">
+	<div class="container text-center">
+		<img src="/img/bolt.png">
+	</div>
+</section>
+<section id="login-section">
+	<div class="container">
+		<div class="row" id="login-container">
+			<div class="col-sm-5  col-xs-12 pull-right">
+				<form id="loginForm" method="POST">
+					<div class="panel panel-default" id="login-panel">
+						<div class="panel-heading text-center">
+							<span>Sign in</span>
+						</div>
+						<div class="panel-body">
+							<div class="form-group">
+								<label>Email</label>
+								<input type="text" name="email" class="form-control input-lg" placeholder="input your email">
+							</div>
+							<div class="form-group">
+								<label>Password</label>
+								<input type="password" name="password" class="form-control input-lg" placeholder="input your password">
+							</div>
+							<div class="form-group">
+								<button type="submit" class="btn btn-success btn-block" id="signin-btn">Sign in</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="col-sm-7  col-xs-12 pull-left">
+				<h2>Tuktukan Alert App</h2>
+				<span id="marketing">
+					Your online companion in disaster and emergency  preparedness.  
+				</span>
+				<ul>
+					<li><a href="/">Become ready and equiped in times of disaster and emergency</a></li>
+					<li><a href="/faq">More information about tuktukan alert app</a></li>
+					<li><a href="#">Contact us</a></li>
+				</ul>
+			</div>
+		</div>	
+	</div>
+</section>
+<section id="login-footer">
+	<div class="container">
+		<ul class="list-unstyled">
+			<li><a href="/">Home</a></li>
+			<li><a href="/faq">Faq</a></li>
+		</ul>
+	</div>	
+</section>
+<script type="text/javascript">
+	var message = "<%= loginMessage %>";
+</script>
+<% include ../partials/vendors %>
+<script type="text/javascript" src="/js/login.js"></script>
+<% include ../partials/footer %>

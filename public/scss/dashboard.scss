@@ -1,0 +1,17 @@
+#page-content-wrapper{
+	#dash-map-container{
+		padding: 0;
+		#map{
+			min-height: 350px;
+			background: $grey;
+		}
+	}
+
+	#dash-emergency-container{
+		padding:0;
+		#emergencyStats{
+			min-height: 350px;
+			background: $grey;
+		}
+	}
+}

@@ -1,0 +1,23 @@
+footer{
+	padding:15px 0px 10px 0px;
+	background:$black;
+
+	#copyright{
+		font-size: 1.8rem;
+		color:$white;
+		display: block;
+		line-height: 38px;
+	}
+	#footer-nav{
+		li{
+			display: inline-block;
+			a{
+				line-height: 35px;
+				font-size: 1.6rem;
+				text-decoration: none;
+				color:$white;
+				margin-left: 10px;
+			}
+		}
+	}
+}

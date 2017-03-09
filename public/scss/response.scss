@@ -1,0 +1,18 @@
+@import './variable';
+@import './app_nav';
+@import './signin';
+@import './dashboard';
+@import './app_preview';
+@import './annoucement';
+@import './global';
+
+
+
+#emergencyPerDay, #emergencyTypes, #emergencyBar, #reportTblContainer{
+	height: 350px;
+}
+
+#reportTblContainer{
+	overflow:scroll;
+	overflow-x: hidden;
+}
