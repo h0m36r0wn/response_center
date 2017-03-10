@@ -8,7 +8,7 @@ var CONFIG = require('../bin/config');
 var passport = require('../bin/passport');
 var Reports = require('../controllers/Reports');
 router.route('/dashboard')
-		.get(passport.checkAuthentication, function(req, res){
+		.get(function(req, res){
 			res.render('admin/dashboard', { page:'dashboard' });
 		})
 
@@ -194,5 +194,16 @@ router.route('/get_stats')
 					(err) => res.json({data:[],err:err})
 				)
 
+		})
+
+router.route('/get_recent_reports')
+		.get((req, res) =>{
+			var limit = req.query.limit || 10;
+			var report = new Reports();
+			report.getRecentReports(limit)
+				.then(
+					(reportsObj) => res.json({reports:reportsObj}),
+					(err) => res.json({err:err, reports:[]}) 
+				)
 		})
 module.exports = router;

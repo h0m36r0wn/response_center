@@ -50,6 +50,17 @@ class Reports{
 		})
 	}
 
+	
+	getRecentReports(limitNum){
+		let limit = limitNum || 10;
+		return new Promise((resolve, reject) => {
+			ReportsMdl.getRecentReports(limit)
+				.then(
+					(reportsObj) => resolve(reportsObj),
+					(err) => reject(err)
+				)
+		});
+	}
 }
 
 module.exports = Reports;

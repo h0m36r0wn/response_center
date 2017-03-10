@@ -79,5 +79,17 @@ var self = module.exports = {
 				if(results) resolve(results)
 			})
 		})
+	},
+
+	getRecentReports:(limitNum) => {
+		return new Promise((resolve,reject) => {
+			Reports.find({})
+				.limit(parseInt(limitNum))
+				.sort('-date_reported')
+				.exec((err, reportsObj) => {
+					if(err) reject('Unknown error happened while getting reports');
+					if(reportsObj) resolve(reportsObj);
+				})
+		})
 	}
 }

@@ -3,17 +3,45 @@ $(document).ready(function(){
 	$.material.ripples();
 	$.material.input();
 	$responseApp.init();
-
 });
 
 var $responseApp = (function(){
 	var $emergencyStats =  $('#emergencyStats');
 	var socket = io('http://localhost:3000');
 	var map;
+	var monthDates;
+	var $recentContainer = $('#recentContainer');
+	var date = new Date(), y = date.getFullYear(), m = date.getMonth(), t = date.getTime();
 	var init = function(){
+ 		protos();
+		monthDates = getThisMonth();
 		map = createMap();
-		createEmergencyAnalytics();
+		displayReports();
 		listenOnSos();
+		createBarChart();
+	}
+	var createBarChart = function(){
+		getEmergencyStatData(monthDates)
+			.then(function(resp){
+				createEmergencyAnalytics(barChartData(resp.data));
+			})
+	}
+	var protos = function(){
+		Date.prototype.addDays = function(days) {
+		    var dat = new Date(this.valueOf())
+		    dat.setDate(dat.getDate() + days);
+		    return dat;
+		}
+		Date.prototype.subtractDays = function(days) {
+		    var dat = new Date(this.valueOf())
+		    dat.setDate(dat.getDate() - days);
+		    return dat;
+		}
+		Date.prototype.withoutTime = function () {
+		    var d = new Date(this);
+		    d.setHours(0, 0, 0, 0);
+		    return d;
+		}
 	}
 	var createMap = function(){
 		switch(page){
@@ -67,27 +95,15 @@ var $responseApp = (function(){
 			message:iconElem+" "+messageElem
 		})
 	}
-	var createEmergencyAnalytics = function(){
+	var createEmergencyAnalytics = function(chartData){
 		google.charts.load('current', {'packages':['corechart']});
-		google.charts.setOnLoadCallback(drawEmergencyStats);
+		google.charts.setOnLoadCallback(function(){
+			drawEmergencyStats(chartData)
+		});
 	}
 
-	var drawEmergencyStats =function(){
-		var data = google.visualization.arrayToDataTable([
-        ['Emergency', 'Alerts Recieved', { role: 'style' } ],
-        ['Fire',3,'color:#F44336'],
-        ['Earthquake',4, 'color:#795548'],
-        ['Flood',9,'color:color:#03A9F4'],
-        ['Medical Emergency', 24,'color:#E91E63'],
-        ['Burglary', 10,'color:#283593'],
-        ['Intimidation', 12,'color:#009688'],
-        ['Heinous Crime', 5,'color:#263238'],
-        ['Accident', 1,'color:#FF5722'],
-        ['Other', 34,'color:#FFFF00']
-       
-      ]);
-	
-
+	var drawEmergencyStats =function(chartData){
+		var data = google.visualization.arrayToDataTable(chartData);
 		var opts = {
 			title:'Emergency Alerts Recieved',
 			height:350,
@@ -102,5 +118,82 @@ var $responseApp = (function(){
 		var chart = new google.visualization.ColumnChart(document.getElementById('emergencyStats'));
 		chart.draw(data, opts);
 	}
+
+
+	var barChartData = function(data){
+		var emergencyTypes =  {emergency:0, fire:0, earthquake:0, flood:0,
+				medical_emergency:0, burglary:0, intimidation:0, heinous_crime:0,
+				accident:0, other:0 };
+
+		var typesData = [['Report Type', 'Report Number',{role:'style'}]];
+
+		data.forEach(function(item) {
+			emergencyTypes[item.report_type] += 1;
+		})
+
+		Object.keys(emergencyTypes).forEach(function(key){
+			var metaData = getTypeLblName(key);
+			typesData.push([metaData.label, emergencyTypes[key], 'color:'+metaData.color])
+		})
+		
+		return typesData;
+	}
+
+
+	var getEmergencyStatData = function(dates){
+		return $.ajax({
+					url:'/admin/get_stats?startDate='+dates.startDate+'&endDate='+dates.endDate,
+					type:'GET'
+				})
+	}
+
+	var getThisMonth = function(){
+		var startDate = new Date(y, m, 1).withoutTime();
+		var endDate = new Date(y, m + 1, 0).withoutTime();
+		return { startDate:startDate, endDate:endDate };
+	}
+	var getTypeLblName = function(reportType){
+		switch(reportType){
+			case 'emergency': return {label:'Emergency', color:'#F44336'};break;
+			case 'fire': return {label:'Fire', color:'#795548'} ;break;
+			case 'earthquake': return {label:'Earthquake', color:'#03A9F4'}; break;
+			case 'flood': return {label:'Flood', color:'#E91E63'}; break;
+			case 'medical_emergency': return {label:'Medical Emergency', color:'#283593'}; break;
+			case 'burglary': return {label:'Burglary', color:'#263238'}; break;
+			case 'intimidation': return {label:'Intimidation', color:'#FF5722'}; break;
+			case 'heinous_crime': return {label:'Heinous Crime', color:'#F44336'}; break;
+			case 'accident': return {label:'Accident', color:'#FFFF00'}; break;
+			case 'other': return {label:'Other', color:'#009688'}; break;
+		}
+	}
+
+	var getRecentReports = function(){
+		return $.ajax({
+			type:'GET',
+			url:'/admin/get_recent_reports?limit=7'
+		});
+	}
+
+	var displayReports = function(){
+		getRecentReports()
+			.then(function(resp){
+				var reports = resp.reports;
+				$.each(reports, function(ind, obj){
+					var type = getTypeLblName(obj.report_type);
+					var isValidated = obj.isValidated == true ? 'Resolved' : 'Not yet resolve';
+					var elem = '<div class="list-group-item">';
+					elem += 		'<div class="row-content">';
+					elem += 			'<div class="least-content">'+moment(obj.date_reported).startOf('minute').fromNow()+'</div>';
+					elem += 			'<h4 class="list-group-item-heading">'+obj.name+'</h4>';
+					elem += 			'<p class="list-group-item-text">'+type.label+'</p>';
+					elem += 			'<p class="list-group-item-text">'+isValidated+'</p>';
+					elem += 		'</div>';
+					elem +=		'</div>';
+					elem +=		'<div class="list-group-separator"></div>';
+					$recentContainer.prepend(elem);
+				})
+			})
+	}
+
 	return  { init: init }
 }());
