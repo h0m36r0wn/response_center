@@ -175,3 +175,10 @@ table th, table td {
   margin-top: 15px;
   font-size: 1.6rem;
   font-weight: bold; }
+
+.panel-default .panel-heading {
+  background: #212121 !important;
+  color: #FFEB3B; }
+  .panel-default .panel-heading span {
+    font-weight: bold;
+    font-size: 1.8rem; }

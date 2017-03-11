@@ -8,19 +8,19 @@ var CONFIG = require('../bin/config');
 var passport = require('../bin/passport');
 var Reports = require('../controllers/Reports');
 router.route('/dashboard')
-		.get(function(req, res){
+		.get(passport.checkAuthentication, passport.protectPage, function(req, res){
 			res.render('admin/dashboard', { page:'dashboard' });
 		})
 
 
 router.route('/annoucements')
-		.get(function(req , res){
+		.get(passport.checkAuthentication,passport.protectPage, (req , res) =>{
 			res.render('admin/annoucements', { page:'annoucements', postMessage:req.flash('post') });
 		})
 
 
 router.route('/post')
-		.get(function(req, res){
+		.get(passport.checkAuthentication, passport.protectPage, function(req, res){
 			res.render('admin/post', { page:'annoucements'});
 		})
 		.post(function(req, res){
@@ -36,7 +36,7 @@ router.route('/post')
 		})
 
 router.route('/edit_post/:postId')
-		.get(function(req, res){
+		.get(passport.checkAuthentication, passport.protectPage, (req, res) => {
 			let postId = req.params.postId;
 			let annoucements = new Annoucements();
 			annoucements.getAnnoucement(postId).then((annoucementObj) => {
@@ -44,7 +44,7 @@ router.route('/edit_post/:postId')
 			})
 
 		})
-		.post(function(req, res){
+		.post(passport.checkAuthentication, (req, res) => {
 			let postId = req.params.postId;
 			let body = req.body;
 			let annoucements = new Annoucements(body.post_title, body.content,
@@ -61,24 +61,10 @@ router.route('/edit_post/:postId')
 			)
 		})
 
-router.route('/get_all_annoucenments')
-		.get(function(req,res) {
-			let annoucements = new Annoucements();
-			let data = [];
 
-			if(req.xhr || req.headers.accept.indexOf('json') > -1){ 
-				let annoucements = new Annoucements();
-				annoucements.getAnnoucements().then(
-					(annoucementsObj) => res.json({data:annoucementsObj}),
-					(err) => res.status(500).json([])
-				)
-			}else{
-				res.redirect('/admin/annoucements');
-			}
-		})
 
 router.route('/get_annoucement/:postId')
-		.get(function(req, res) {
+		.get(passport.checkAuthentication, (req, res) =>  {
 			if(req.xhr || req.headers.accept.indexOf('json') > -1){
 				let annoucements = new Annoucements(); 
 				let postId = req.params.postId;
@@ -92,7 +78,7 @@ router.route('/get_annoucement/:postId')
 			
 		})
 router.route('/delete_annoucement/:postId')
-		.get(function(req,res){
+		.get(passport.checkAuthentication, (req,res) =>{
 			let annoucements = new Annoucements();
 			let postId = req.params.postId;
 
@@ -103,34 +89,22 @@ router.route('/delete_annoucement/:postId')
 				)
 		})
 router.route('/map')
-		.get(function(req, res){
+		.get(passport.checkAuthentication, (req, res) => {
 			res.render('admin/map', { page:'map'});
 		})
 
 router.route('/security_team')
-		.get(function(req, res){
+		.get(passport.checkAuthentication, passport.protectPage, (req, res) =>{
 			res.render('admin/security_team', { page: 'security team'})
 		})
 
-router.route('/get_security_team')
-		.get(function(req, res) {
-			if(req.xhr || req.headers.accept.indexOf('json') > -1 ){
-				var users = new Users();
-				users.getSecurityTeam()
-					.then(
-						(team) => res.json({data:team}),
-						(err) => res.json([])
-					)
-			}else{
-				res.redirect('/admin/security_team')
-			}
-		})
+
 
 router.route('/add_team')
-		.get(function(req, res){
+		.get(passport.checkAuthentication, (req, res) =>{
 			res.render('admin/add_team',{ page: 'security team' })
 		})
-		.post(function(req, res) {
+		.post(passport.checkAuthentication, (req, res) => {
 			var body = req.body;
 			var user = new Users(
 				body.email, body.password, CONFIG.ROLES.SECURITY_TEAM, body.first_name,
@@ -150,26 +124,17 @@ router.route('/add_team')
 		})
 
 router.route('/app_preview')
-		.get(function(req, res){
+		.get(passport.checkAuthentication, (req, res) =>{
 			res.render('admin/app_preview', { page:'app preview'})
 		})
 		
 router.route('/reports')
-		.get((req, res) => {
+		.get(passport.checkAuthentication, passport.protectPage, (req, res) => {
 			res.render('admin/reports', { page:'Incedent Report  Listing'});
-		})
-router.route('/get_reports')
-		.get((req, res) =>{
-			var reports = new Reports();
-			reports.getAllReports()
-				.then(
-					(reportsObj) => res.json({data:reportsObj}),
-					(err) => res.json({data:[],err:err})
-				)
 		})
 
 router.route('/report_action')
-		.post((req, res) => {
+		.post(passport.checkAuthentication, (req, res) => {
 			let postData = req.body;
 			let report = new Reports();
 			report.reportAction(postData.type, postData.reportId)
@@ -180,11 +145,44 @@ router.route('/report_action')
 		})
 
 router.route('/stats')
-		.get((req, res) => {
+		.get(passport.checkAuthentication, passport.protectPage, (req, res) => {
 			res.render('admin/stats', { page:'Emergency Stats' });
 		})
+
+
+
+/*
+	================ APIS =================
+*/
+
+router.route('/get_all_annoucenments')
+		.get((req,res) => {
+			let annoucements = new Annoucements();
+			let data = [];
+
+			if(req.xhr || req.headers.accept.indexOf('json') > -1){ 
+				let annoucements = new Annoucements();
+				annoucements.getAnnoucements().then(
+					(annoucementsObj) => res.json({data:annoucementsObj}),
+					(err) => res.status(500).json([])
+				)
+			}else{
+				res.redirect('/admin/annoucements');
+			}
+		})
+
+router.route('/get_recent_reports')
+		.get(passport.checkAuthentication, (req, res) =>{
+			var limit = req.query.limit || 10;
+			var report = new Reports();
+			report.getRecentReports(limit)
+				.then(
+					(reportsObj) => res.json({reports:reportsObj}),
+					(err) => res.json({err:err, reports:[]}) 
+				)
+		})
 router.route('/get_stats')
-		.get((req, res) => {
+		.get(passport.checkAuthentication, (req, res) => {
 			var dates = { startDate:req.query.startDate, endDate:req.query.endDate };
 
 			var reports = new Reports();
@@ -195,15 +193,27 @@ router.route('/get_stats')
 				)
 
 		})
-
-router.route('/get_recent_reports')
-		.get((req, res) =>{
-			var limit = req.query.limit || 10;
-			var report = new Reports();
-			report.getRecentReports(limit)
+router.route('/get_reports')
+		.get(passport.checkAuthentication, (req, res) =>{
+			var reports = new Reports();
+			reports.getAllReports()
 				.then(
-					(reportsObj) => res.json({reports:reportsObj}),
-					(err) => res.json({err:err, reports:[]}) 
+					(reportsObj) => res.json({data:reportsObj}),
+					(err) => res.json({data:[],err:err})
 				)
 		})
+router.route('/get_security_team')
+		.get(passport.checkAuthentication, (req, res) => {
+			if(req.xhr || req.headers.accept.indexOf('json') > -1 ){
+				var users = new Users();
+				users.getSecurityTeam()
+					.then(
+						(team) => res.json({data:team}),
+						(err) => res.json([])
+					)
+			}else{
+				res.redirect('/admin/security_team')
+			}
+		})
+
 module.exports = router;

@@ -76,7 +76,7 @@ var stats = (function(){
 		$tbl.clear().draw();
 		$.each(data, function(ind, obj){
 			$tbl.row.add([obj.name, obj.report_type, moment(obj.date_reported).format
-				('MM D, YYYY')]).draw();
+				('MMMM D, YYYY')]).draw();
 		})
 	}
 	var createByTypesData = function(byTypeData){

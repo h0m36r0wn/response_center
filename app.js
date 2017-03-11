@@ -33,7 +33,11 @@ app.use(session({
 app.use(flash());
 app.use(passportObj.initialize());
 app.use(passportObj.startSession());
-
+app.use((req, res, next) => {
+  res.locals.user = req.user;
+  res.locals.ROLES = CONFIG.ROLES;
+  next();
+});
 app.use('/', index);
 
 

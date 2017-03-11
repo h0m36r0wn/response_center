@@ -74,7 +74,38 @@ module.exports = {
 					if(team) resolve(team)
 				 })
 		})
+	},
+
+	checkIfHasAdmin:() =>{
+		return new Promise((resolve,reject) => {
+			let query = { "role":CONFIG.ROLES.ADMIN };
+			Users.find(query)
+				 .select({password:0})
+				 .exec((err, admin) => {
+				 	if(err) reject('Unknown error happened while getting admin accounts');
+				 	if(admin){
+				 		if(admin.length > 0) resolve(true);
+				 		resolve(false);
+				 	}
+				 })
+		})
+	},
+	createAdminAccount:(adminInfo) => {
+		return new Promise((resolve, reject) => {
+			var admin = new Users();
+			admin.email = adminInfo.email;
+			admin.password = adminInfo.password;
+			admin.role = adminInfo.role;
+			admin.first_name = adminInfo.first_name;
+			admin.last_name = adminInfo.last_name;
+			admin.area = adminInfo.area;
+			admin.save((err, adminObj) => {
+				if(err) reject('Unknown error happened while creating admin account');
+				if(adminObj) resolve(adminObj);
+			})
+		})
 	}
+
 }
 
 

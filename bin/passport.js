@@ -58,11 +58,19 @@ class Passport{
 			case CONFIG.ROLES.SECURITY_TEAM :
 				res.redirect('/admin/map');
 				break;
-			case CONFIG.ROLE.ADMIN :
+			case CONFIG.ROLES.ADMIN :
 				res.redirect('/admin/dashboard');
 				break;
 			default:
 				res.redirect('/response/signout');
+		}
+	}
+	
+	protectPage(req, res, next){
+		if(req.user.role == CONFIG.ROLES.ADMIN){
+			next();
+		}else{
+			res.redirect('/admin/map');
 		}
 	}
 
